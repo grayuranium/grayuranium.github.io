@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>博客搭建中的坑</title>
+      <link href="/posts/f02d01d6/"/>
+      <url>/posts/f02d01d6/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-博客不可迁移问题"><a href="#1-博客不可迁移问题" class="headerlink" title="1. 博客不可迁移问题"></a>1. 博客不可迁移问题</h1><p><strong>现象</strong>：hexo在github上搭建的静态博客在本地文件被摧毁后无法迁移</p><p><strong>解决方式</strong>：那是当然的啦！TNND因为这个原因我之前的博客没了，后面检查的时候发现github博客repo只保存了网站的资源，但是<mark class="hl-label pink">不包含你hexo的本地配置</mark> ，所以要迁移建议重建一个repo专门保存<code>hexo clean</code>后的架构。</p><h1 id="2-gitbash消失问题"><a href="#2-gitbash消失问题" class="headerlink" title="2. gitbash消失问题"></a>2. gitbash消失问题</h1><p><strong>现象</strong>：右键的gitbash提示找不到对应文件</p><p><strong>解决方式</strong>：不要乱改注册表，越改越遭，直接卸载git重装，如果无法卸载，直接点击git安装程序重装后再卸载。</p><h1 id="3-github连接失败问题"><a href="#3-github连接失败问题" class="headerlink" title="3. github连接失败问题"></a>3. github连接失败问题</h1><p><strong>现象</strong>：git的ssh操作报错</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kex_exchange_identification: Connection closed by remote host</span><br><span class="line">Connection closed by 20.205.243.166 port 22</span><br></pre></td></tr></table></figure><p><strong>解决方式</strong>：<mark class="hl-label pink">玄学</mark> 问题，与你家网和github间的网络质量和github把你IP暂时封禁相关，一般有以下几个解决方法：1、断开VPN。2、修改host文件github地址。3、换网，用你手机的热点试试。4、实在整不了只有放平心态，等一天说不定能好。</p><h1 id="4-hexo的PWA设置的问题"><a href="#4-hexo的PWA设置的问题" class="headerlink" title="4. hexo的PWA设置的问题"></a>4. hexo的PWA设置的问题</h1><p><strong>现象</strong>：部署后使用lighthouse检测报错</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">No matching service worker detected. You may need to reload the page, or check that the scope of the service worker for the current page encloses the scope and start URL from the manifest.</span><br></pre></td></tr></table></figure><p><strong>解决方式</strong>：说明service worker没有部署成功，可能是插件问题，需要先使用<code>hexo g</code>生成后把.deploy_git删除后再使用<code>hexo d</code>部署，见<a href="https://github.com/JLHwung/hexo-offline/issues/114">https://github.com/JLHwung/hexo-offline/issues/114</a>。</p><h1 id="5-hexo-filter-nofollow生成时报错"><a href="#5-hexo-filter-nofollow生成时报错" class="headerlink" title="5. hexo-filter-nofollow生成时报错"></a>5. hexo-filter-nofollow生成时报错</h1><p><strong>现象</strong>：生成时报错</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TypeError [ERR_INVALID_URL]: Invalid URL</span><br></pre></td></tr></table></figure><p><strong>解决方式</strong>：将所有的超链接改成符合Markdown的超链接语法。</p><h1 id="6-PWA的lighthouse检查失败"><a href="#6-PWA的lighthouse检查失败" class="headerlink" title="6. PWA的lighthouse检查失败"></a>6. PWA的lighthouse检查失败</h1><p><strong>现象</strong>：lighthouse显示PWA不完善</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Does not set a theme color for the address bar.</span><br><span class="line">Failures: The theme-color meta tag did not contain a valid CSS color.</span><br></pre></td></tr></table></figure><p><strong>解决方式</strong>：需要在html头中加入<code>&lt;meta name=&quot;theme-color&quot; content=&quot;#49b1f5&quot;/&gt;</code>，也只有部分浏览器能够支持，详细的支持表格见<a href="https://caniuse.com/#feat=meta-theme-color">https://caniuse.com/#feat=meta-theme-color</a>。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 博客配置 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> hexo </tag>
+            
+            <tag> blog </tag>
+            
+            <tag> bug </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>博客配置备忘录</title>
+      <link href="/posts/446cf1e7/"/>
+      <url>/posts/446cf1e7/</url>
+      
+        <content type="html"><![CDATA[<div class="note danger no-icon flat"><p>注意：由于使用了hexo-butterfly-douban插件，部署页面时需要使用hexo deploy，不能使用hexo d和hexo g -d！</p></div><h1 id="npm指令"><a href="#npm指令" class="headerlink" title="npm指令"></a>npm指令</h1><p>npm install&#x2F;uninstall</p><ul><li>-g：全局安装</li><li>–save：同时影响package.json中的dependencies</li><li>–save-dev：同时影响package.json中的devDependencies</li><li>–registry <a href="https://registry.npm.taobao.org/">https://registry.npm.taobao.org</a>：镜像加速</li></ul><h1 id="hexo指令"><a href="#hexo指令" class="headerlink" title="hexo指令"></a>hexo指令</h1><ul><li>hexo init：初始化</li><li>hexo clean：清除缓存</li><li>hexo generate&#x2F;g：生成页面</li><li>hexo douban：爬取豆瓣信息</li><li>hexo server&#x2F;s：启动本地预览</li><li>hexo server -p 5000：设置本地预览端口</li><li>hexo deploy：部署页面</li><li>hexo new page ‘’：创建页面</li><li>hexo new post ‘’：创建文章</li></ul><h1 id="文件夹结构"><a href="#文件夹结构" class="headerlink" title="文件夹结构"></a>文件夹结构</h1><ul><li>node_modules：本项目的npm包</li><li>scaffolds：页面模板</li><li>themes：主题相关资源</li><li>source：用户资源<ul><li>CNAME：绑定域名文件</li><li>manifest.json：PWA配置文件</li></ul></li><li>public：hexo g后生成的页面</li><li>.deploy_git：hexo d后部署的页面</li><li>_config.yml：hexo配置文件</li><li>_config.xxx.yml：主题配置文件</li><li>hexo-offline.config.cjs：PWA的JS配置文件</li></ul><h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><div class="tabs" id="configuration-"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#configuration--1">域名</button></li><li class="tab"><button type="button" data-href="#configuration--2">图标</button></li><li class="tab"><button type="button" data-href="#configuration--3">插件</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="configuration--1"><p>namesilo</p><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="configuration--2"><p>Font Awesome V5+iconfont</p><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="configuration--3"><ul><li>评论：valine+gitalk</li><li>在线聊天：chatra</li><li>分享：sharejs</li><li>搜索：hexo-generator-search</li><li>广告：google adsense（未通过审核）</li><li>动态背景：hexo-butterfly-vanta</li><li>PWA：hexo-offline</li><li>字数统计：hexo-wordcount</li><li>Pjax：考虑稳定性暂未使用</li><li>音乐：hexo-tag-aplayer</li><li>电影、书籍：hexo-butterfly-douban</li><li>图片压缩：<a href="https://tinypng.com/">https://tinypng.com/</a></li><li>博文生成数字：hexo-abbrlink</li><li>链接保护：hexo-filter-nofollow</li><li>站点地图：hexo-generator-sitemap、hexo-generator-baidu-sitemap</li><li>CDN：jsDelivr</li><li>图床：<a href="https://www.superbed.cn/">聚合图床</a></li></ul><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div></div><h1 id="顶部图的获取顺序"><a href="#顶部图的获取顺序" class="headerlink" title="顶部图的获取顺序"></a>顶部图的获取顺序</h1><div class="tabs" id="image-"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#image--1">Page</button></li><li class="tab"><button type="button" data-href="#image--2">Post</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="image--1"><p>top_img(page)&gt;default_top_img(theme configuration)&gt;default_xxx_img(theme configuration)</p><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="image--2"><p>top_img(page)&gt;cover(page)&gt;default_top_img(theme configuration)&gt;cover(theme configuration)</p><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div></div><h1 id="Front-matter"><a href="#Front-matter" class="headerlink" title="Front-matter"></a>Front-matter</h1><div class="tabs" id="front-matter-"><ul class="nav-tabs"><li class="tab active"><button type="button" data-href="#front-matter--1">Page</button></li><li class="tab"><button type="button" data-href="#front-matter--2">Post</button></li></ul><div class="tab-contents"><div class="tab-item-content active" id="front-matter--1"><ul><li><strong>title</strong>：【必需】頁面標題</li><li><strong>date</strong>：【必需】頁面創建日期</li><li><strong>type</strong>：【必需】標籤、分類和友情鏈接三個頁面需要配置</li><li><strong>updated</strong>：【可選】頁面更新日期</li><li><strong>description</strong>：【可選】頁面描述</li><li><strong>keywords</strong>：【可選】頁面關鍵字</li><li><strong>comments</strong>：【可選】顯示頁面評論模塊(默認 true)</li><li><strong>top_img</strong>：【可選】頁面頂部圖片</li><li><strong>mathjax</strong>：【可選】顯示mathjax(當設置mathjax的per_page: false時，才需要配置，默認 false)</li><li><strong>katex</strong>：【可選】顯示katex(當設置katex的per_page: false時，才需要配置，默認 false)</li><li><strong>aside</strong>：【可選】顯示側邊欄 (默認 true)</li><li><strong>aplayer</strong>：【可選】在需要的頁面加載aplayer的js和css,請參考文章下面的音樂 配置</li><li><strong>highlight_shrink</strong>：【可選】配置代碼框是否展開(true&#x2F;false)(默認為設置中highlight_shrink的配置)</li></ul><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div><div class="tab-item-content" id="front-matter--2"><ul><li><strong>title</strong>：【必需】文章標題</li><li><strong>date</strong>：【必需】文章創建日期</li><li><strong>updated</strong>：【可選】文章更新日期</li><li><strong>tags</strong>：【可選】文章標籤</li><li><strong>categories</strong>：【可選】文章分類</li><li><strong>keywords</strong>：【可選】文章關鍵字</li><li><strong>description</strong>：【可選】文章描述</li><li><strong>top_img</strong>：【可選】文章頂部圖片</li><li><strong>cover</strong>：【可選】文章縮略圖(如果沒有設置top_img,文章頁頂部將顯示縮略圖，可設為false&#x2F;圖片地址&#x2F;留空)</li><li><strong>sticky</strong>：【可选】文章置頂。數值越大，置頂的優先級越大。</li><li><strong>comments</strong>：【可選】顯示文章評論模塊(默認 true)</li><li><strong>toc</strong>：【可選】顯示文章TOC(默認為設置中toc的enable配置)</li><li><strong>toc_number</strong>：【可選】顯示toc_number(默認為設置中toc的number配置)</li><li><strong>toc_style_simple</strong>：【可選】顯示 toc 簡潔模式</li><li><strong>copyright</strong>：【可選】顯示文章版權模塊(默認為設置中post_copyright的enable配置)</li><li><strong>copyright_author</strong>：【可選】文章版權模塊的文章作者</li><li><strong>copyright_author_href</strong>：【可選】文章版權模塊的文章作者鏈接</li><li><strong>copyright_url</strong>：【可選】文章版權模塊的文章連結鏈接</li><li><strong>copyright_info</strong>：【可選】文章版權模塊的版權聲明文字：此文章版權歸xxxxx所有，如有轉載，請註明來自原作者</li><li><strong>mathjax</strong>：【可選】顯示mathjax(當設置mathjax的per_page: false時，才需要配置，默認 false)</li><li><strong>katex</strong>：【可選】顯示katex(當設置katex的per_page: false時，才需要配置，默認 false)</li><li><strong>aplayer</strong>：【可選】在需要的頁面加載aplayer的js和css,請參考文章下面的音樂 配置</li><li><strong>highlight_shrink</strong>：【可選】配置代碼框是否展開(true&#x2F;false)(默認為設置中highlight_shrink的配置)</li><li><strong>aside</strong>：【可選】顯示側邊欄 (默認 true)</li><li><strong>indexing</strong>: false【可选】不包括在搜索中</li><li><strong>twitter_card</strong>：为其他APP提供的内容</li><li><strong>twitter_image</strong>：为其他APP提供的内容</li><li><strong>twitter_id</strong>：为其他APP提供的内容</li><li><strong>twitter_site</strong>：为其他APP提供的内容</li><li><strong>google_plus</strong>：为其他APP提供的内容</li><li><strong>fb_admins</strong>：为其他APP提供的内容</li><li><strong>fb_app_id</strong>：为其他APP提供的内容</li></ul><button type="button" class="tab-to-top" aria-label="scroll to top"><i class="fas fa-arrow-up"></i></button></div></div></div>]]></content>
+      
+      
+      <categories>
+          
+          <category> 博客配置 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> hexo </tag>
+            
+            <tag> blog </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
+</search>
